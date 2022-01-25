@@ -1,0 +1,2 @@
+isFailed = False
+failStatement = ""
