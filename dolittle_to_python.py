@@ -3,6 +3,7 @@ import os
 
 basepath = os.path.split(os.path.realpath(__file__))[0]
 sys.path.append(os.path.join(basepath, 'pyparsing.zip'))
+sys.path.append(os.path.join(basepath, 'colorama.zip'))
 sys.path.append(os.path.join(basepath, 'jaconv.zip'))
 sys.path.append(os.path.join(basepath, 'modules'))
 
@@ -11,17 +12,14 @@ from tkinter import filedialog
 
 from pyparsing import Combine, Word, alphas, ZeroOrMore, alphanums, nums, SkipTo, Literal, Suppress,\
     oneOf, Forward, Optional, Group, OneOrMore, infixNotation, opAssoc
+import colorama
+from colorama import Fore, Back, Style
+colorama.init(autoreset=True)
 
 from preprocess import delete_comment, zenkaku_to_hankaku
 from preprocess import japanese
 import st_trans
 import failInfo
-
-import colorama
-from colorama import Fore, Back, Style
-colorama.init(autoreset=True)
-
-
 
 dori_code = '''\
 '''
@@ -147,7 +145,7 @@ def state_init():
     list_concat_stmt = _list_concat.setResultsName("連結")
     turtle_stmt = _turtle.setResultsName("タートルの作成")
     random_stmt = _random.setResultsName("乱数")
-
+    
     # --- 全体の認識 ------------------------------------
     # 左の方から優先して認識を行う
     recog << (list_overwrite_stmt ^ list_push_stmt ^ def_func_stmt ^ call_func_assign_stmt ^ call_func_stmt ^ while_stmt ^ foreach_stmt ^ for_stmt ^ if_stmt ^

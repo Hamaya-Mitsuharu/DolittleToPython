@@ -29,6 +29,12 @@ def ifelse_trans(li, recog, indent_num):
     
     return st
 
+def ifElseElif_trans(li, recog, indent_num):
+    failInfo.isFailed = True
+    failInfo.failStatement += "翻訳は「IF-ELIF」もしくは「IF-ELIF-ELSE」に対応していません\n"
+    return "\n"
+
+
 # _for = Group('[' + ZeroOrMore('|' + _VARIABLE + '|') + _blockWithOutBracket + ']' + '!' + (_expr) + '繰り返す') + '.'
 def for_trans(li, recog, indent_num):
     blockStmt = li[2]
